@@ -1,10 +1,15 @@
 import React from 'react';
 import './App.css';
 
+// NRN - this test here
+export function label(name: string) {
+    return `Hello ${name.toUpperCase()}`;
+}
+
 function App() {
   return (
       <div>
-        <h1>Hello React</h1>
+        <h1>{label("React")}</h1>
       </div>
   );
 }
