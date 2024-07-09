@@ -5,11 +5,16 @@ export function label(name: string) : string {
     return `Hello ${name.toUpperCase()}`;
 }
 
+// NRN - Refactor -> Extract Component to move to function
+export function Heading() : React.JSX.Element {
+    return <h1>{label("React")}</h1>;
+}
+
 function App(): React.JSX.Element {
   return (
       <div>
-        <h1>{label("React")}</h1>
-        <h2>Hey There!</h2>
+          <Heading/>
+          <h2>Hey There!</h2>
       </div>
   );
 }
