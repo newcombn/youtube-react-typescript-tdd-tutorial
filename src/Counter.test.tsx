@@ -1,5 +1,5 @@
 import React from "react";
-import {render, screen} from "@testing-library/react";
+import {fireEvent, render, screen} from "@testing-library/react";
 import Counter2, {Counter1} from "./Counter";
 
 test("Counter2 render a label and counter", (): void => {
@@ -58,4 +58,20 @@ test("Counter2 should start at passed value", (): void => {
     const counterAlt : HTMLElement = screen.getByTitle('counter');
     expect(counter).toHaveTextContent("10");
     expect(counterAlt).toHaveTextContent("10");
+})
+
+// NRN - check that passed argument sets start of counter count
+test("Counter2 count should increment by 1", (): void => {
+    // NRN - start with default which will be count 0
+    render(<Counter2 />);
+    // NRN - two different approaches to search for elements Role and aria-label vs Title
+    const counter : HTMLElement = screen.getByRole('region', { name: 'Counter' });
+    const counterAlt : HTMLElement = screen.getByTitle('counter');
+    expect(counter).toHaveTextContent("0");
+    expect(counterAlt).toHaveTextContent("0");
+    // NRN - imitate a click action on the counter (which should increment count)
+    fireEvent.click(counter);
+    // NRN - check that value is incremented after imitation click
+    expect(counter).toHaveTextContent("1");
+    expect(counterAlt).toHaveTextContent("1");
 })

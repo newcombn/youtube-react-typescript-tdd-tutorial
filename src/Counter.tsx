@@ -49,14 +49,18 @@ class Counter2 extends Component<CounterProps, CounterState> {
                 count: this.props.start,
             });
         }
-    }
+    };
+
+    // NRN - used to set the new state when count should be incremented (onClick)
+    incrementCounter = () => this.setState({ count: this.state.count + 1 });
 
     render() : React.JSX.Element {
         const { label = "Count" }: Readonly<CounterProps> = this.props;
         return (
             <div>
                 <span title={label}>Counter</span>
-                <span id="counter" title="counter" role="region" aria-live="polite" aria-label="Counter">
+                <span id="counter" title="counter" role="region"
+                      aria-live="polite" aria-label="Counter" onClick={this.incrementCounter}>
 					{this.state.count}
 				</span>
             </div>
