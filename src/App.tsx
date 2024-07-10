@@ -12,7 +12,7 @@ function App(): React.JSX.Element {
       <div>
           <Heading/>
           <h2>Hey There!</h2>
-          <Counter2 label={"Current"}/>
+          <Counter2 label={"Current"} start={125} />
       </div>
   );
 }

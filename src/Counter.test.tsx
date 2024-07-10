@@ -39,3 +39,23 @@ test("Counter1 render custom label/counter", (): void => {
     const count : HTMLElement = screen.getByTestId("counter");
     expect(count).toBeInTheDocument();
 });
+
+// NRN - this test makes use of state to determine counter count - start at 0
+test("Counter2 should start at zero", (): void => {
+    render(<Counter2 />);
+    // NRN - two different approaches to search for elements Role and aria-label vs Title
+    const counter : HTMLElement = screen.getByRole('region', { name: 'Counter' });
+    const counterAlt : HTMLElement = screen.getByTitle('counter');
+    expect(counter).toHaveTextContent("0");
+    expect(counterAlt).toHaveTextContent("0");
+})
+
+// NRN - check that passed argument sets start of counter count
+test("Counter2 should start at passed value", (): void => {
+    render(<Counter2 start={10} />);
+    // NRN - two different approaches to search for elements Role and aria-label vs Title
+    const counter : HTMLElement = screen.getByRole('region', { name: 'Counter' });
+    const counterAlt : HTMLElement = screen.getByTitle('counter');
+    expect(counter).toHaveTextContent("10");
+    expect(counterAlt).toHaveTextContent("10");
+})
