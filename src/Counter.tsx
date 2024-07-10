@@ -52,7 +52,12 @@ class Counter2 extends Component<CounterProps, CounterState> {
     };
 
     // NRN - used to set the new state when count should be incremented (onClick)
-    incrementCounter = () => this.setState({ count: this.state.count + 1 });
+    // added typing MouseEvent to allow for passing of event parameter
+    // added ternary to add 10 with shift + click or 1 with click alone
+    incrementCounter = (event : React.MouseEvent<HTMLElement>) => {
+        const inc : number = event.shiftKey? 10 : 1;
+        return this.setState({ count: this.state.count + inc });
+    }
 
     render() : React.JSX.Element {
         const { label = "Count" }: Readonly<CounterProps> = this.props;
