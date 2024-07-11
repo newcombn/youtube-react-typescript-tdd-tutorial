@@ -1,3 +1,6 @@
+// NRN - Counter1 and Counter2 are set up as smart components, whereas NewCounter
+// is set up as a dumb component that receives information from parent App
+
 import React, {Component} from 'react';
 
 export type CounterProps = {
