@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App, {label} from './App';
+import userEvent from "@testing-library/user-event";
 
 // NRN - this tests actual JSX returned from App() function (h1 content)
 test('render h1 content within App', () => {
@@ -50,3 +51,27 @@ test('pass label wrong type2', () => {
   // @ts-ignore
   expect(() => label(42)).toThrow(TypeError);
 });
+
+// NRN - check that a click increments NewCounter count by 1
+test("NewCounter count should increment by 1", (): void => {
+  // NRN - start with default which will be count 0
+  render(<App />);
+  const counter : HTMLElement = screen.getByTestId('counter');
+  expect(counter).toHaveTextContent("250");
+  // NRN - imitate a click action on the counter (which should increment count)
+  userEvent.click(counter);
+  // NRN - check that value is incremented after imitation click
+  expect(counter).toHaveTextContent("251");
+})
+
+// NRN - check that a shift + click increments NewCounter count by 10
+test("NewCounter count should increment by 10", (): void => {
+  // NRN - start with default which will be count 0
+  render(<App />);
+  const counter : HTMLElement = screen.getByTestId('counter');
+  expect(counter).toHaveTextContent("250");
+  // NRN - imitate a click action on the counter (which should increment count)
+  userEvent.click(counter, {shiftKey: true});
+  // NRN - check that value is incremented after imitation shift + click
+  expect(counter).toHaveTextContent("260");
+})
